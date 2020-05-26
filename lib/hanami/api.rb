@@ -50,8 +50,8 @@ module Hanami
     #       "Hello from Hanami!"
     #     end
     #   end
-    def self.root(*args, **kwargs, &blk)
-      @router.root(*args, **kwargs, &blk)
+    def self.root(*args, &blk)
+      @router.root(*args, &blk)
     end
 
     # Defines a route that accepts GET requests for the given path.
@@ -87,8 +87,8 @@ module Hanami
     #   class MyAPI < Hanami::API
     #     get "/users/:id", to: ->(*) { [200, {}, ["OK"]] }, id: /\d+/
     #   end
-    def self.get(*args, **kwargs, &blk)
-      @router.get(*args, **kwargs, &blk)
+    def self.get(*args, &blk)
+      @router.get(*args, &blk)
     end
 
     # Defines a route that accepts POST requests for the given path.
@@ -102,8 +102,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.post(*args, **kwargs, &blk)
-      @router.post(*args, **kwargs, &blk)
+    def self.post(*args, &blk)
+      @router.post(*args, &blk)
     end
 
     # Defines a route that accepts PATCH requests for the given path.
@@ -117,8 +117,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.patch(*args, **kwargs, &blk)
-      @router.patch(*args, **kwargs, &blk)
+    def self.patch(*args, &blk)
+      @router.patch(*args, &blk)
     end
 
     # Defines a route that accepts PUT requests for the given path.
@@ -132,8 +132,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.put(*args, **kwargs, &blk)
-      @router.put(*args, **kwargs, &blk)
+    def self.put(*args, &blk)
+      @router.put(*args, &blk)
     end
 
     # Defines a route that accepts DELETE requests for the given path.
@@ -147,8 +147,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.delete(*args, **kwargs, &blk)
-      @router.delete(*args, **kwargs, &blk)
+    def self.delete(*args, &blk)
+      @router.delete(*args, &blk)
     end
 
     # Defines a route that accepts TRACE requests for the given path.
@@ -162,8 +162,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.trace(*args, **kwargs, &blk)
-      @router.trace(*args, **kwargs, &blk)
+    def self.trace(*args, &blk)
+      @router.trace(*args, &blk)
     end
 
     # Defines a route that accepts OPTIONS requests for the given path.
@@ -177,8 +177,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.options(*args, **kwargs, &blk)
-      @router.options(*args, **kwargs, &blk)
+    def self.options(*args, &blk)
+      @router.options(*args, &blk)
     end
 
     # Defines a route that accepts LINK requests for the given path.
@@ -192,8 +192,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.link(*args, **kwargs, &blk)
-      @router.link(*args, **kwargs, &blk)
+    def self.link(*args, &blk)
+      @router.link(*args, &blk)
     end
 
     # Defines a route that accepts UNLINK requests for the given path.
@@ -207,8 +207,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.unlink(*args, **kwargs, &blk)
-      @router.unlink(*args, **kwargs, &blk)
+    def self.unlink(*args, &blk)
+      @router.unlink(*args, &blk)
     end
 
     # Defines a route that redirects the incoming request to another path.
@@ -221,8 +221,8 @@ module Hanami
     # @since 0.1.0
     #
     # @see .get
-    def self.redirect(*args, **kwargs, &blk)
-      @router.redirect(*args, **kwargs, &blk)
+    def self.redirect(*args, &blk)
+      @router.redirect(*args, &blk)
     end
 
     # Defines a routing scope. Routes defined in the context of a scope,
@@ -245,8 +245,8 @@ module Hanami
     #   end
     #
     #   # It generates a route with a path `/v1/users`
-    def self.scope(*args, **kwargs, &blk)
-      @router.scope(*args, **kwargs, &blk)
+    def self.scope(*args, &blk)
+      @router.scope(*args, &blk)
     end
 
     # Mount a Rack application at the specified path.
@@ -270,8 +270,8 @@ module Hanami
     #   class MyAPI < Hanami::API
     #     mount MyRackApp.new, at: "/foo"
     #   end
-    def self.mount(*args, **kwargs, &blk)
-      @router.mount(*args, **kwargs, &blk)
+    def self.mount(*args, &blk)
+      @router.mount(*args, &blk)
     end
 
     # Use a Rack middleware

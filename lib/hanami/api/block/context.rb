@@ -133,25 +133,22 @@ module Hanami
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
         def call
-          case caught
-            in String => body
-            [status, headers, [body]]
-            in Integer => status
-            # rubocop:disable Style/RedundantSelf
-            #
-            # NOTE: It must use `self.body` so it will pick the method defined above.
-            #
-            #       If `self` isn't enforced, Ruby will try to bind `body` to
-            #       the current pattern matching context.
-            #       When that happens, the body that was manually set is ignored,
-            #       which results in a bug.
-            [status, headers, [self.body || http_status(status)]]
-            # rubocop:enable Style/RedundantSelf
-            in [Integer, String] => response
-            [response[0], headers, [response[1]]]
-            in [Integer, Hash, String] => response
-            headers.merge!(response[1])
-            [response[0], headers, [response[2]]]
+          response = caught
+          if response.is_a?(String)
+            [status, headers, [response]]
+          elsif response.is_a?(Integer)
+            [response, headers, [body || http_status(response)]]
+          else
+            raise ArgumentError unless response.is_a?(Array) && response.size >= 2 && response.size <= 3 && response[0].is_a?(Integer)
+
+            if response[1].is_a?(String)
+              [response[0], headers, [response[1]]]
+            elsif response[1].is_a?(Hash) && response[2].is_a?(String)
+              headers.merge!(response[1])
+              [response[0], headers, [response[2]]]
+            else
+              raise ArgumentError
+            end
           end
         end
         # rubocop:enable Metrics/MethodLength
